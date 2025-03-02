@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>技术博客运营，在踩坑中蜕变的经验分享 | 白衣INK</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="../img/pwa/favicon.png"><!-- index.css--><link rel="stylesheet" href="../css/index.css?v=3.0.12"><!-- inject head--><link rel="canonical" href="https://baiyi.ink/posts/5c55.html"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.min.css"><!-- katex--><!-- Open Graph--><meta name="description" content="写技术博客的目的主要有两点：一是记录，便于自己总结提升，防止遗忘；二是具备热爱与他人分享的精神。这两者本身并不冲突，记录的同时也可以与大家分享。如果我们只是记录而不分享，也无可厚非，但这样对文章的质量要求可能会降低，因为不需要对读者负责，同时也没有读者的互动与批评指正。 俗话说，讲给别人听，让别人听"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="白衣INK"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="../img/pwa/favicon.png"><link rel="apple-touch-icon" href="../img/pwa/favicon.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.12' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><link rel="stylesheet" href="/css/baiyi.css"><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+          },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-01-15 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":350,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "早上好，新的一天开始了",
+            noon: "午餐时间",
+            afternoon: "下午好",
+            night: "早点休息",
+            goodnight: "晚安",
+        },
+        witty_words: ["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- background img--><!-- loading--><!-- console--><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="../archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="../categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="../tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网站</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.deepsea.xin/" title="主页"><img class="nolazyload back-menu-item-icon" src="https://www.deepsea.xin/img/logo.png" alt="主页"><span class="back-menu-item-text">主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://blog.deepsea.xin/" title="博客"><img class="nolazyload back-menu-item-icon" src="https://www.deepsea.xin/img/logo.png" alt="博客"><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="../archives/"><i class="solitude  fas fa-folder-closed"></i><span>全部文章</span></a></li><li><a class="site-page child" href="../categories/"><i class="solitude  fas fa-clone"></i><span>全部分类</span></a></li><li><a class="site-page child" href="../tags/"><i class="solitude  fas fa-tags"></i><span>全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="../moments/"><i class="solitude  fas fa-wifi"></i><span>朋友圈</span></a></li><li><a class="site-page child" href="../links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li><li><a class="site-page child" href="../javascript:travelling()"><i class="solitude  fas fa-gift"></i><span>宝藏博主</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="../equipment/"><i class="solitude  fas fa-laptop"></i><span>我的装备</span></a></li><li><a class="site-page child" href="../tlink/"><i class="solitude  fas fa-toolbox"></i><span>在线工具</span></a></li><li><a class="site-page child" href="../music/"><i class="solitude  fas fa-music"></i><span>音乐馆</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="../tags/PHP/">PHP<sup>1</sup></a><a href="../tags/API/">API<sup>1</sup></a><a href="../tags/%E6%8E%A5%E5%8F%A3/">接口<sup>1</sup></a><a href="../tags/Lua/">Lua<sup>1</sup></a><a href="../tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发<sup>1</sup></a><a href="../tags/Android/">Android<sup>1</sup></a><a href="../tags/FusionApp/">FusionApp<sup>1</sup></a><a href="../tags/%E5%8D%9A%E5%AE%A2%E8%BF%90%E8%90%A5/">博客运营<sup>1</sup></a><a href="../tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享<sup>1</sup></a></div></div><span class="sidebar-menu-item-title">网站信息</span><div class="webinfo"><div class="webinfo-item"><div class="item-name">全站字数 :</div><div class="item-count">5.4k</div></div></div></div></div><!-- keyboard--><!-- righhtside--><div class="needEndHide" id="rightside"><div class="rs_hide"></div><div class="rs_show"><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon solitude fas fa-bars-progress"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网站</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.deepsea.xin/" title="主页"><img class="nolazyload back-menu-item-icon" src="https://www.deepsea.xin/img/logo.png" alt="主页"><span class="back-menu-item-text">主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://blog.deepsea.xin/" title="博客"><img class="nolazyload back-menu-item-icon" src="https://www.deepsea.xin/img/logo.png" alt="博客"><span class="back-menu-item-text">博客</span></a></div></div></div></div><a id="site-name" href="../index.html" title="返回博客主页"><span class="title">白衣INK</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">技术博客运营，在踩坑中蜕变的经验分享</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="../archives/"><i class="solitude  fas fa-folder-closed"></i><span>全部文章</span></a></li><li><a class="site-page child" href="../categories/"><i class="solitude  fas fa-clone"></i><span>全部分类</span></a></li><li><a class="site-page child" href="../tags/"><i class="solitude  fas fa-tags"></i><span>全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="../moments/"><i class="solitude  fas fa-wifi"></i><span>朋友圈</span></a></li><li><a class="site-page child" href="../links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li><li><a class="site-page child" href="../javascript:travelling()"><i class="solitude  fas fa-gift"></i><span>宝藏博主</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="../equipment/"><i class="solitude  fas fa-laptop"></i><span>我的装备</span></a></li><li><a class="site-page child" href="../tlink/"><i class="solitude  fas fa-toolbox"></i><span>在线工具</span></a></li><li><a class="site-page child" href="../music/"><i class="solitude  fas fa-music"></i><span>音乐馆</span></a></li></ul></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="../img/default.jpg" alt="技术博客运营，在踩坑中蜕变的经验分享"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="../categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="../tags/%E5%8D%9A%E5%AE%A2%E8%BF%90%E8%90%A5/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>博客运营</span></a><a class="post-meta__tags" href="../tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>经验分享</span></a></div></div></div></div><h1 class="post-title">技术博客运营，在踩坑中蜕变的经验分享</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2025-02-28 21:23:36"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2025-02-28T13:23:36.000Z">2025-02-28T13:23:36.000Z</time></span><span class="post-meta-date" title="最后更新于 2025-03-02 15:42:18"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2025-03-02T07:42:18.837Z">2025-03-02T07:42:18.837Z</time></span><span class="post-meta-wordcount"><i class="post-meta-icon solitude fas fa-file-word" title="文章字数"></i><span class="word-count">2.4k</span><span class="post-meta-separator"></span><i class="post-meta-icon solitude fas fa-clock" title="阅读耗时"></i><span>7 min</span></span><span class="post-meta-position" title="作者IP归属地为山东·泰安"><i class="post-meta-icon solitude fas fa-location-dot"></i><span>山东·泰安</span></span><a class="post-meta-pv" href="" title="文章热度"><i class="post-meta-icon solitude fas fa-fire-flame-curved"></i><span id="busuanzi_value_page_pv"><i class="solitude fas fa-spinner fa-spin"></i></span></a></div></div></div><div id="post-info-bottom"></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content article-container"><p>写技术博客的目的主要有两点：一是记录，便于自己总结提升，防止遗忘；二是具备热爱与他人分享的精神。这两者本身并不冲突，记录的同时也可以与大家分享。如果我们只是记录而不分享，也无可厚非，但这样对文章的质量要求可能会降低，因为不需要对读者负责，同时也没有读者的互动与批评指正。</p>
+<p>俗话说，讲给别人听，让别人听懂，才是真的掌握。技术博客写作也是如此，写博客可以大大提升我们的学习能力，以及对知识掌握的熟练程度。</p>
+<h2 id="一：强制互动不可取！"><a href="#一：强制互动不可取！" class="headerlink" title="一：强制互动不可取！"></a>一：强制互动不可取！</h2><p><strong>仅评论可见 回复后可见</strong> 这类做法毫无意义。技术分享博客的初衷是便利读者理解与应用知识，强制评论不仅违背初衷，还可能引发低质量评论。如果读者不想评论，可能会随意写一通，导致垃圾评论泛滥，而你却忙于反垃圾评论，而不去思考垃圾评论的根源。</p>
+<p>我发现一个很有意思的现象，这类博客网站往往界面设计不佳，花里胡哨、缺乏重点层次，且内容多为搬运，质量堪忧。</p>
+<p>别本末倒置，舍本逐末。很多博客运营者将大量精力放在数据造假、刷评论量这些表面功夫上，而不是提升内容质量、优化用户界面。长此以往，博客会失去用户信任，在竞争激烈的网络环境中被迅速淘汰。</p>
+<p><strong>我们应该去思考如何把文章写好，而不是去设置一些毫无实际用处的门槛与限制。</strong></p>
+<h2 id="二：内容兼顾更新与深度"><a href="#二：内容兼顾更新与深度" class="headerlink" title="二：内容兼顾更新与深度"></a>二：内容兼顾更新与深度</h2><p>部分技术分享博客存在严重的内容短板。内容仅停留在基础概念的表面阐述，就像搭建房屋时只打了个浅浅的地基，没有深入挖掘底层原理。包括我曾经也是这样，三个字概括就是“假大空”，文章内容过于广泛，这里摘一点，那里蹭一点，文章不精，过于追求广度而忽略了文章的深度才是核心！</p>
+<p>文章发布后，并不意味着这篇文章就完事了，要及时更新内容。如果内容失效或者后续有更好的想法和实现方式，这些都是要及时去更新你写过的文章的。长期不更新内容会使得博客脱节。新的框架、新的写法都在不断涌现，博客如果不及时跟进，还在介绍过时的算法和技术，读者自然会流失。</p>
+<p>读者渴望从技术分享博客中获取最新、最实用的知识，只有不断提供深度内容并保持更新，才能满足读者需求，提升博客的吸引力与价值。</p>
+<h2 id="三：主题框架要清晰"><a href="#三：主题框架要清晰" class="headerlink" title="三：主题框架要清晰"></a>三：主题框架要清晰</h2><p>博客界面要主次分明，搜索栏、文章分类栏目都要突出显示。搜索栏应放置在页面的显眼位置，比如顶部导航栏的右侧，以简洁的线条和醒目的图标引导用户快速定位。</p>
+<p>文章分类栏目则可设置在页面左侧的侧边栏，采用垂直排列的方式，每个分类都以独特的图标搭配文字标识，方便用户一目了然。分类的层级不宜过多，最多设置两级，确保用户能快速找到目标文章类别。</p>
+<p>在内容展示区，也就是首页文章列表。每篇文章都要有清晰的标题和摘要，标题用较大字号并加粗显示，与文章内容形成明显区分。摘要部分则采用适中的字号，简洁概括文章的核心要点，让用户在浏览时能迅速判断是否要深入阅读。</p>
+<p>同时，一些非主要展示内容应当在视图之外，可以在页面的底部设置版权信息、联系我们等基本信息，既不影响主要内容的展示，又能完善整个博客的框架结构，让用户在使用博客时，无论是查找文章、浏览内容还是了解博客的相关信息，都能有清晰流畅的体验。</p>
+<h2 id="四：其他需要注意的地方"><a href="#四：其他需要注意的地方" class="headerlink" title="四：其他需要注意的地方"></a>四：其他需要注意的地方</h2><ol>
+<li>封面设计原则</li>
+</ol>
+<p>封面是丰富博客页面的手段。一个好的封面可以让用户在阅读标题之前就对文章的内容有一个大致的判断。但封面的制作不应占用太长的时间，一般来讲，一个封面顶多一分钟就可以制作完成。大部分封面采用统一格式，也正是为了这一点，可以大大缩小制作封面的时间。</p>
+<ul>
+<li><p>主题相关性：封面图片与文字必须紧密围绕文章核心主题，精准传达内容主旨，确保读者一眼就能洞悉文章大致方向。</p>
+</li>
+<li><p>视觉吸引力：运用高分辨率、色彩鲜明且构图巧妙的图片，搭配简洁有力的标题文字。文字排版错落有致，重点突出，避免繁杂堆砌。可加入独特的元素或符号，让封面具有辨识度，如为博客设计专属的标志或图案，或使用特殊的艺术字体，但字体除了那种字体资源分享，建议采用同一种字体，和网站字体也要契合。</p>
+</li>
+<li><p>适配性：充分考虑不同终端设备的展示效果，确保封面在电脑、平板、手机等各类屏幕上都能完整呈现，无变形或文字被遮挡的情况。</p>
+</li>
+<li><p>风格一致与多样性相结合：保持整个博客图文封面风格统一，无论是色调、字体，这可以培养读者的品牌认知与视觉记忆。当然，在大体统一的基础上，允许个别文章采用独特的设计，增添博客的视觉效果，不至于过于单调。偶尔穿插其他类型的封面，像代码运行的演示可以直接在封面展现。当然你也可以打造系列主题封面，根据博客内容系列设置主题，如不同分类采用不同设计，既多样又有连贯性。</p>
+</li>
+</ul>
+<p>博客文章封面设计方式取决于博客定位、目标受众和内容特点，可选择统一风格（注重品牌建设、提供专业系统内容时更有利）、不统一风格（追求创意和多样性，吸引喜欢新鲜和个性化内容读者时更合适）或两者结合。</p>
+<ol start="2">
+<li>排版要精致</li>
+</ol>
+<p>字如其人，排版如斯。语文老师总提醒我们，你的作文内容好坏决定分数上限，字写得是否好看决定分数下限。很遗憾的是，技术平台上欣赏不到每位博主的真实书法，排版就成了很重要的替代，既体现写作基础能力的熟练度，也是个人软实力的体现，更是对受众的一种尊重。</p>
+<ol start="3">
+<li>标题的重要性</li>
+</ol>
+<p>如果说看人的第一眼是脸，看文章的第一眼就是标题了。其次是摘要，受众了解文字的三层次分别是标题、摘要、内容。最好的文章是，标题足够吸引力，摘要具备概括性，内容丰富有料。</p>
+<p>使用好的标题不等于“标题党”，“标题党”的套路就是吸引你的眼球让你有动力了解内容，如果标题和内容形成呼应是最好的，如果标题和内容是虎头蛇尾就有点“狼来了”的味道，每个人都有公众信用账户，慎用不要过度透支。这也从侧面说明了标题的重要性，所以标题肯定需要一定程度的考究和粉饰，但不是造假、夸大、扯淡！</p>
+<ol start="4">
+<li>图文并茂</li>
+</ol>
+<p>千字难抵一图。文字的陈述终究是略显“枯燥”的，特别是技术文章，好的绘图不光能减少很多口舌描述，还能更快、更完整地帮助阅读受众理解博主的表达意图和内容。而且图文搭配也会充盈整个文章，变得更加丰富，表达力更好，对于媒体传播也会友好一些。</p>
+<p>在技术写作上要保持持之以恒的兴趣和动力的确不易，不要因为没有受众而沮丧，也不要因为工作忙碌时间而借口拖延，这些错误我都犯过。即使再忙也要找些内容来保持写作动作，哪怕你输出一篇工具使用，一个问题解决过程……一件事情坚持下来很不易，如果中间断开再重启会非常吃力。</p>
+<p>学习或技术写作是自己的事情，对自己成长和积累有受益的事情需要自己来驱动，自己既是第一责任人也是第一执行人，既当裁判员又当运动员，需要一颗自我明镜之心，天道酬勤，未来的自己一定非常感谢过去狠狠努力、坚持不懈的自己。</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=2766521276&amp;s=640"></div><div class="post-copyright__author_name">白衣</div><div class="post-copyright__author_desc">不尚虚华，自成万壑千峰</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="../index.html">白衣INK</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="../tags/%E5%8D%9A%E5%AE%A2%E8%BF%90%E8%90%A5/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>博客运营<span class="tagsPageCount">1</span></span></a><a class="post-meta__tags" href="../tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>经验分享<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-full"><a href="6050.html"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">基于lua简单实现APP的远程更新</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=2766521276&amp;s=640"></div><div class="description">欢迎来到白衣博客，秉持简约不简单的设计理念，致力于产品设计与交互体验。<br><br>相信你一定可以在这里找到你想要的东西</div><div class="bottom-group"><span class="left"><div class="name">白衣</div><div class="desc">不尚虚华，<br>自成万壑千峰。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/baiyinet" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2766521276&amp;site=qq&amp;menu=yes" title="QQ"><i class="solitude  fab fa-qq"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%9A%E5%BC%BA%E5%88%B6%E4%BA%92%E5%8A%A8%E4%B8%8D%E5%8F%AF%E5%8F%96%EF%BC%81"><span class="toc-text">一：强制互动不可取！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%EF%BC%9A%E5%86%85%E5%AE%B9%E5%85%BC%E9%A1%BE%E6%9B%B4%E6%96%B0%E4%B8%8E%E6%B7%B1%E5%BA%A6"><span class="toc-text">二：内容兼顾更新与深度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%EF%BC%9A%E4%B8%BB%E9%A2%98%E6%A1%86%E6%9E%B6%E8%A6%81%E6%B8%85%E6%99%B0"><span class="toc-text">三：主题框架要清晰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%EF%BC%9A%E5%85%B6%E4%BB%96%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-text">四：其他需要注意的地方</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="5b9a.html" title="solitude主题文章顶部添加波浪效果"><div class="thumbnail"><img alt="solitude主题文章顶部添加波浪效果" src="../img/default.jpg"></div><div class="content"><span class="title" href="5b9a.html" title="solitude主题文章顶部添加波浪效果">solitude主题文章顶部添加波浪效果</span></div></a><a class="aside-list-item" href="16ed.html" title="两种方式实现自制随机图片API"><div class="thumbnail"><img alt="两种方式实现自制随机图片API" src="../img/default.jpg"></div><div class="content"><span class="title" href="16ed.html" title="两种方式实现自制随机图片API">两种方式实现自制随机图片API</span><span class="categories" href="16ed.html">实用教程</span></div></a><a class="aside-list-item" href="6050.html" title="基于lua简单实现APP的远程更新"><div class="thumbnail"><img alt="基于lua简单实现APP的远程更新" src="../img/default.jpg"></div><div class="content"><span class="title" href="6050.html" title="基于lua简单实现APP的远程更新">基于lua简单实现APP的远程更新</span><span class="categories" href="6050.html">软件开发</span></div></a><a class="aside-list-item" href="" title="技术博客运营，在踩坑中蜕变的经验分享"><div class="thumbnail"><img alt="技术博客运营，在踩坑中蜕变的经验分享" src="../img/default.jpg"></div><div class="content"><span class="title" href="" title="技术博客运营，在踩坑中蜕变的经验分享">技术博客运营，在踩坑中蜕变的经验分享</span><span class="categories" href="">经验分享</span></div></a></div></div></div></div></main><footer id="footer"><div id="st-footer-bar"><div class="footer-logo"><span>白衣INK</span></div><div class="footer-bar-description">来自 白衣INK 最新设计与技术的文章</div><a class="footer-bar-link" href="../about/">了解更多</a></div><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/everfu" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="../mailto:o@everfu.org" title="Mail"><i class="solitude  far fa-envelope"></i></a><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=2766521276&amp;s=640" alt="返回顶部"></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/1329819902" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://v.douyin.com/iJsLc8jt/" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="../archives/" title="Archives">Archives</a><a class="footer-item" href="../categories/" title="Categories">Categories</a><a class="footer-item" href="../tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="../cookies/" title="Cookies">Cookies</a><a class="footer-item" href="../privacy/" title="Privacy">Privacy</a><a class="footer-item" href="../copyright/" title="Copyright">Copyright</a></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 By&nbsp;<a class="footer-bar-link" href="../index.html"><img class="author-avatar" src="../img/pwa/favicon.png">白衣</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="../atom.xml" alt="RSS">RSS</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude/blob/main/LICENSE" alt="License"><i class="solitude fas fa-copyright"></i><i class="solitude fab fa-creative-commons-by"></i><i class="solitude fab fa-creative-commons-nc"></i><i class="solitude fab fa-creative-commons-nd"></i></a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://www.deepsea.xin/" alt="白衣主页">白衣主页</a></div></div></div></footer></div><!-- right_menu--><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div><!-- inject body--><div><script src="../js/utils.js?v=3.0.12"></script><script src="../js/main.js?v=3.0.12"></script><script src="../js/third_party/waterfall.min.js?v=3.0.12"></script><script src="https://fastly.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="https://fastly.jsdelivr.net/npm/typeit@8.8.7/dist/index.umd.min.js"></script><script src="../js/third_party/universe.min.js?v=3.0.12"></script><script>dark()
+</script><script src="../js/tw_cn.js?v=3.0.12"></script><script src="https://fastly.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.min.js"></script><script src="../js/post_ai.js?v=3.0.12"></script><script src="https://fastly.jsdelivr.net/npm/colorthief@2.6.0/dist/color-thief.min.js"></script><script src="../js/covercolor/local.js?v=3.0.12"></script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://fastly.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><script src="../js/right_menu.js?v=3.0.12"></script><div class="js-pjax"><script defer pjax src="https://fastly.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- google adsense--><!-- search--><!-- music--></body></html>
+        <script>
+            const posts = ["posts/5b9a.html","posts/16ed.html","posts/6050.html","posts/5c55.html"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
