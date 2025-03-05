@@ -5927,9 +5927,9 @@ span.tagsPageCount {
   top: 0;
   max-height: 64px;
   overflow: hidden;
-  background: var(--efu-card-bg);
   backdrop-filter: saturate(180%) blur(20px);
   transition: 0.1s ease-out;
+  border-radius: 50px;
 }
 #tag #tag-page-tags:hover {
   max-height: 1000px;
@@ -6302,6 +6302,66 @@ time.comment-time {
 }
 #bber .datafrom i {
   margin-right: 4px;
+}
+#bber .bber-music {
+  width: 100%;
+  height: 90px;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: var(--style-border-always);
+  background: var(--efu-secondbg);
+}
+#bber .bber-music .aplayer-lrc {
+  display: none;
+}
+#bber .aplayer {
+  margin: 0;
+}
+#bber .aplayer .aplayer-info .aplayer-music {
+  height: 23px;
+}
+#bber .aplayer .aplayer-info .aplayer-music .aplayer-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--efu-black);
+}
+#bber .aplayer .aplayer-info .aplayer-controller {
+  align-items: center;
+}
+#bber .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
+  padding: 0;
+}
+#bber .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+  background: var(--efu-gray);
+  height: 8px;
+  border-radius: 12px;
+  transition: 0.3s;
+  overflow: hidden;
+}
+#bber .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
+  height: 100%;
+  border-radius: 12px;
+}
+#bber .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+  display: none;
+}
+#bber .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+  height: 100%;
+  border-radius: 12px;
+}
+#bber .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap:hover .aplayer-bar {
+  height: 12px;
+}
+#bber .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+  position: initial;
+}
+#bber .aplayer.aplayer-withlrc .aplayer-pic {
+  height: 82px;
+  width: 82px;
+  margin: 4px;
+  border-radius: 4px;
 }
 #bber .bber-video {
   position: relative;
