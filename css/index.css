@@ -7832,11 +7832,6 @@ div#banners .bannerText {
   box-shadow: none;
   min-height: calc(100vh - 464px);
 }
-@media screen and (max-width: 768px) {
-  #page {
-    padding: 0 1rem;
-  }
-}
 #page > div:not(.author-content-item) {
   animation: slide-in 0.6s 0.2s backwards;
 }
